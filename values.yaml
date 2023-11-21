@@ -31,7 +31,7 @@ ingress:
   hosts:
     - host: chart-example.local
       paths:
-        - path: /
+        - path: /a
           pathType: ImplementationSpecific
   tls: []
 
