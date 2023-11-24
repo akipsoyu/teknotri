@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Docker imajını build et
-                    sh 'sudo docker build -t my-angular-app .'
+                    sh 'docker build -t my-angular-app .'
 
                     // Docker imajına tag ekle
                     sh 'docker tag my-angular-app akipsoyu/akipsoyu:v2'
