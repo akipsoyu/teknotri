@@ -1,19 +1,28 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building..'
+                script {
+                    // Docker imajını build et
+                    sh 'sudo docker build -t my-angular-app .'
+
+                    // Docker imajına tag ekle
+                    sh 'docker tag my-angular-app akipsoyu/akipsoyu:v2'
+                }
             }
         }
-        stage('Test') {
+
+        stage('Push to Docker Hub') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                script {
+                    // Docker Hub'a giriş yap (Şifreyi doğrudan burada veriyorsunuz)
+                    sh 'echo "123456789ba*" | docker login --username akipsoyu --password-stdin'
+
+                    // Docker imajını push et
+                    sh 'docker push akipsoyu/akipsoyu:v2'
+                }
             }
         }
     }
