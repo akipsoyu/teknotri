@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+
+    environment {
+        // Burada projeniz için gerekli olan çevre değişkenlerini tanımlayabilirsiniz.
+        // Örneğin: NPM_TOKEN = credentials('npm-token')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Git reposundan kodu çek
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Bağımlılıkları yükle
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Testleri çalıştır
+                script {
+                    sh 'npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Projeyi derle
+                script {
+                    sh 'npm run build -- --prod'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Burada deploy işlemlerini ekleyin
+                // Örneğin, Firebase, AWS, Azure vb. servislere deploy edebilirsiniz
+                // script {
+                //     sh 'firebase deploy --only hosting'
+                // }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Her durumda çalışacak adımlar (örneğin, temizleme işlemleri)
+        }
+        success {
+            // Pipeline başarıyla tamamlandığında çalışacak adımlar
+        }
+        failure {
+            // Hata durumunda çalışacak adımlar
+            // Örneğin: Hata bildirimleri göndermek
+        }
+    }
+}
