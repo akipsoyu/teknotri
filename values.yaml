@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: akipsoyu/akipsoyu1
+  repository: akipsoyu/akipsoyu
   pullPolicy: IfNotPresent
   tag: v1
 
