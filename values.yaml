@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: akipsoyu/akipsoyu
   pullPolicy: IfNotPresent
-  tag: "03fd02dc"
+  tag: "974c9ec7"
 
 imagePullSecrets: []
 nameOverride: ""
